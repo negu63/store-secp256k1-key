@@ -1,4 +1,9 @@
+import { useState } from "react";
+
 function App() {
+  const [publicKey, setPublicKey] = useState("-");
+  const [privateKey, setPrivateKey] = useState("-");
+
   return (
     <>
       <h3>Store secp256k1 private key in browser</h3>
@@ -6,9 +11,9 @@ function App() {
       <br />
       <div>
         <div>Public key</div>
-        <div>-</div>
+        <div>{publicKey}</div>
         <div>Private key</div>
-        <div>-</div>
+        <div>{privateKey}</div>
         <br />
         <input type="button" value="Generate ECDSA Key" />
         <br />
