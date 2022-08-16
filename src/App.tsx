@@ -38,6 +38,28 @@ function App() {
     );
   }
 
+  async function encryptPrivateKey() {
+    const key = await crypto.subtle.importKey(
+      "raw",
+      Buffer.from(symmetricKey, "hex"),
+      { name: "AES-CBC" },
+      false,
+      ["encrypt", "decrypt"]
+    );
+
+    setEncryptedKey(
+      await crypto.subtle
+        .encrypt(
+          { name: "AES-CBC", iv: Buffer.from(iv, "hex") },
+          key,
+          Buffer.from(privateKey, "hex")
+        )
+        .then(function (encrypted) {
+          console.log(encrypted);
+          return Buffer.from(encrypted).toString("hex");
+        })
+    );
+  }
   return (
     <>
       <h3>Store secp256k1 private key in browser</h3>
