@@ -5,7 +5,7 @@ function App() {
   const [publicKey, setPublicKey] = useState("-");
   const [privateKey, setPrivateKey] = useState("-");
 
-  function generateKey() {
+  function generateECDSAKey() {
     const privateKey = secp.utils.randomPrivateKey();
 
     setPublicKey(secp.utils.bytesToHex(secp.getPublicKey(privateKey, true)));
@@ -23,7 +23,7 @@ function App() {
         <div>Private key</div>
         <div>{privateKey}</div>
         <br />
-        <input type="button" value="Generate ECDSA Key" onClick={generateKey} />
+        <input type="button" value="Generate ECDSA Key" onClick={generateECDSAKey} />
         <br />
         <br />
         <br />
