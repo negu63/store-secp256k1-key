@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@noble/secp256k1": "^1.6.3",
+    "@types/bcryptjs": "^2.4.2",
     "@types/node": "^16.7.13",
     "@types/react": "^18.0.0",
     "@types/react-dom": "^18.0.0",
