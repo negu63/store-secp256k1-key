@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import * as secp from "@noble/secp256k1";
 import * as bcrypt from "bcryptjs";
 import { Buffer } from "buffer";
@@ -11,17 +11,28 @@ function App() {
   const [iv, setIV] = useState("-");
   const [encryptedKey, setEncryptedKey] = useState("-");
 
-  useEffect(() => {
-    if (privateKey != "-" && symmetricKey != "-") {
-      generateIV();
-    }
-  }, [symmetricKey]);
+  const encryptPrivateKey = useCallback(async () => {
+    const key = await crypto.subtle.importKey(
+      "raw",
+      Buffer.from(symmetricKey, "hex"),
+      { name: "AES-CBC" },
+      false,
+      ["encrypt", "decrypt"]
+    );
 
-  useEffect(() => {
-    if (iv != "-") {
-      encryptPrivateKey();
-    }
-  }, [iv]);
+    setEncryptedKey(
+      await crypto.subtle
+        .encrypt(
+          { name: "AES-CBC", iv: Buffer.from(iv, "hex") },
+          key,
+          Buffer.from(privateKey, "hex")
+        )
+        .then(function (encrypted) {
+          console.log(encrypted);
+          return Buffer.from(encrypted).toString("hex");
+        })
+    );
+  }, [privateKey, symmetricKey, iv]);
 
   function generateECDSAKey() {
     const privateKey = secp.utils.randomPrivateKey();
