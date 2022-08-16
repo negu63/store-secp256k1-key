@@ -61,28 +61,17 @@ function App() {
     );
   }
 
-  async function encryptPrivateKey() {
-    const key = await crypto.subtle.importKey(
-      "raw",
-      Buffer.from(symmetricKey, "hex"),
-      { name: "AES-CBC" },
-      false,
-      ["encrypt", "decrypt"]
-    );
+  useEffect(() => {
+    if (privateKey != "-" && symmetricKey != "-") {
+      generateIV();
+    }
+  }, [privateKey, symmetricKey]);
 
-    setEncryptedKey(
-      await crypto.subtle
-        .encrypt(
-          { name: "AES-CBC", iv: Buffer.from(iv, "hex") },
-          key,
-          Buffer.from(privateKey, "hex")
-        )
-        .then(function (encrypted) {
-          console.log(encrypted);
-          return Buffer.from(encrypted).toString("hex");
-        })
-    );
-  }
+  useEffect(() => {
+    if (iv != "-") {
+      encryptPrivateKey();
+    }
+  }, [iv, encryptPrivateKey]);
 
   return (
     <>
