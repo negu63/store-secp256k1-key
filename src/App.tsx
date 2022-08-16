@@ -42,7 +42,7 @@ function App() {
   }
 
   function generateSymmetricKey(e: React.ChangeEvent<HTMLInputElement>) {
-    if (privateKey != "-") {
+    if (privateKey !== "-") {
       bcrypt.genSalt(10, function (err, salt) {
         setSalt(salt);
 
@@ -62,13 +62,13 @@ function App() {
   }
 
   useEffect(() => {
-    if (privateKey != "-" && symmetricKey != "-") {
+    if (privateKey !== "-" && symmetricKey !== "-") {
       generateIV();
     }
   }, [privateKey, symmetricKey]);
 
   useEffect(() => {
-    if (iv != "-") {
+    if (iv !== "-") {
       encryptPrivateKey();
     }
   }, [iv, encryptPrivateKey]);
