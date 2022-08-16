@@ -17,6 +17,12 @@ function App() {
     }
   }, [symmetricKey]);
 
+  useEffect(() => {
+    if (iv != "-") {
+      encryptPrivateKey();
+    }
+  }, [iv]);
+
   function generateECDSAKey() {
     const privateKey = secp.utils.randomPrivateKey();
 
