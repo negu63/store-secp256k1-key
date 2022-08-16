@@ -31,6 +31,13 @@ function App() {
       });
     }
   }
+
+  async function generateIV() {
+    setIV(
+      Buffer.from(crypto.getRandomValues(new Uint8Array(16))).toString("hex")
+    );
+  }
+
   return (
     <>
       <h3>Store secp256k1 private key in browser</h3>
