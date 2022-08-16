@@ -1,25 +1,29 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "./App.css";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+    <h3>Test</h3>
+      <div>
+        <div>Public key</div>
+        <div>-</div>
+        <div>Private key</div>
+        <div>-</div>
+        <input type="button" value="Generate ECDSA Key" />
+        <hr/>
+        <div>Salt</div>
+        <div>-</div>
+        <div>Symmetric key</div>
+        <div>-</div>
+        <div>Encrypted private key</div>
+        <div>-</div>
+        <label htmlFor="password">
+          <div>Password</div>
+          <input type="password" name="password" id="password" />
+        </label>
+      </div>
+    </>
   );
 }
 
