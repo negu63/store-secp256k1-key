@@ -4,6 +4,8 @@ import * as secp from "@noble/secp256k1";
 function App() {
   const [publicKey, setPublicKey] = useState("-");
   const [privateKey, setPrivateKey] = useState("-");
+  const [salt, setSalt] = useState("-");
+  const [symmetricKey, setSymmetricKey] = useState("-");
 
   function generateECDSAKey() {
     const privateKey = secp.utils.randomPrivateKey();
