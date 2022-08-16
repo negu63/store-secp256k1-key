@@ -72,32 +72,64 @@ function App() {
         })
     );
   }
+
   return (
     <>
-      <h3>Store secp256k1 private key in browser</h3>
+      <h2>Store secp256k1 private key in browser</h2>
       <hr />
-      <br />
+      <h3>ECDSA</h3>
       <div>
-        <div>Public key</div>
+        <div>
+          <b>Public key</b>
+        </div>
         <div>{publicKey}</div>
-        <div>Private key</div>
+        <br />
+        <div>
+          <b>Private key</b>
+        </div>
         <div>{privateKey}</div>
         <br />
-        <input type="button" value="Generate ECDSA Key" onClick={generateECDSAKey} />
+        <input
+          type="button"
+          value="Generate ECDSA Key"
+          onClick={generateECDSAKey}
+        />
         <br />
         <br />
         <br />
-        <div>Salt</div>
-        <div>-</div>
-        <div>Symmetric key</div>
-        <div>-</div>
-        <div>Encrypted private key</div>
-        <div>-</div>
+        <h3>AES-CBC</h3>
+        <div>
+          <b>Salt</b>
+        </div>
+        <div>{salt}</div>
+        <br />
+        <div>
+          <b>Symmetric key</b>
+        </div>
+        <div>{symmetricKey}</div>
         <br />
         <label htmlFor="password">
-          <div>Password</div>
-          <input type="password" name="password" id="password" />
+          <div>
+            <b>Password</b>
+          </div>
+          <input
+            type="password"
+            name="password"
+            id="password"
+            onChange={generateSymmetricKey}
+          />
         </label>
+        <br />
+        <br />
+        <div>
+          <b>IV</b>
+        </div>
+        <div>{iv}</div>
+        <br />
+        <div>
+          <b>Encrypted private key</b>
+        </div>
+        <div>{encryptedKey}</div>
       </div>
     </>
   );
