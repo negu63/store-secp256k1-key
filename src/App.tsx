@@ -1,5 +1,7 @@
 import { useState } from "react";
 import * as secp from "@noble/secp256k1";
+import * as bcrypt from "bcryptjs";
+import { Buffer } from "buffer";
 
 function App() {
   const [publicKey, setPublicKey] = useState("-");
@@ -14,6 +16,19 @@ function App() {
     setPrivateKey(secp.utils.bytesToHex(privateKey));
   }
 
+  function generateSymmetricKey(e: React.ChangeEvent<HTMLInputElement>) {
+    if (privateKey != "-") {
+      bcrypt.genSalt(10, function (err, salt) {
+        setSalt(salt);
+
+        bcrypt.hash(e.target.value, salt, async function (err, hash) {
+          setSymmetricKey(
+            secp.utils.bytesToHex(await secp.utils.sha256(Buffer.from(hash)))
+          );
+        });
+      });
+    }
+  }
   return (
     <>
       <h3>Store secp256k1 private key in browser</h3>
