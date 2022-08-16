@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import * as secp from "@noble/secp256k1";
 import * as bcrypt from "bcryptjs";
 import { Buffer } from "buffer";
@@ -10,6 +10,12 @@ function App() {
   const [symmetricKey, setSymmetricKey] = useState("-");
   const [iv, setIV] = useState("-");
   const [encryptedKey, setEncryptedKey] = useState("-");
+
+  useEffect(() => {
+    if (privateKey != "-" && symmetricKey != "-") {
+      generateIV();
+    }
+  }, [symmetricKey]);
 
   function generateECDSAKey() {
     const privateKey = secp.utils.randomPrivateKey();
