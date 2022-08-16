@@ -8,6 +8,8 @@ function App() {
   const [privateKey, setPrivateKey] = useState("-");
   const [salt, setSalt] = useState("-");
   const [symmetricKey, setSymmetricKey] = useState("-");
+  const [iv, setIV] = useState("-");
+  const [encryptedKey, setEncryptedKey] = useState("-");
 
   function generateECDSAKey() {
     const privateKey = secp.utils.randomPrivateKey();
