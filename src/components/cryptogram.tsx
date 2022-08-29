@@ -18,11 +18,15 @@ export default function Cryptogram() {
       return;
 
     async function saveKey() {
-      await db.key.limit(1).modify({
+      const keyData = {
         encryptedKey: encryptedPrivateKey.contents,
         salt,
         iv,
-      });
+      };
+      const count = await db.key.count();
+
+      if (count === 0) await db.key.add(keyData);
+      else await db.key.limit(1).modify(keyData);
     }
     saveKey();
   }, [encryptedPrivateKey, salt, iv]);
