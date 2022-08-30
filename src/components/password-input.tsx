@@ -1,3 +1,5 @@
+import debounce from "lodash/debounce";
+
 interface PasswordInputProps {
   eventHandler: Function;
 }
@@ -8,7 +10,10 @@ export default function PasswordInput({ eventHandler }: PasswordInputProps) {
       <div>
         <b>Password</b>
       </div>
-      <input type="password" onChange={(e) => eventHandler(e)} />
+      <input
+        type="password"
+        onChange={debounce((e) => eventHandler(e), 200)}
+      />
       <br />
       <br />
     </>
